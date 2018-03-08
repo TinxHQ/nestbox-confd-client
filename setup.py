@@ -17,6 +17,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'nestbox_confd_client.commands': [
+            'config = nestbox_confd_client.commands.config:ConfigCommand',
         ],
     }
 )
