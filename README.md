@@ -4,10 +4,17 @@ A python client library to access nestbox-confd
 
 ## Usage
 
-## Config
+### Creating a client
 
 ```python
-client.config()
+from nestbox_confd_client import Client
+client = Client('<nestbox hostname>', token='<auth token>')
+```
+
+### Fetching the server config
+
+```python
+client.config.get()
 ```
 
 ## Debian package
