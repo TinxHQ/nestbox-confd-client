@@ -32,7 +32,6 @@ client.resellers.list()
 ```python
 reseller = {
     'name': 'test',
-    'reseller_uuid': '00000000-0000-0000-0000-000000000001'
 }
 client.resellers.create(reseller)
 ```
