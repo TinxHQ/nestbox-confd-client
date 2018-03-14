@@ -19,6 +19,42 @@ client = Client('<nestbox hostname>', token='<auth token>')
 client.config.get()
 ```
 
+## Customers
+
+### Listing customers
+
+```python
+client.customers.list()
+```
+
+### Add a new customer
+
+```python
+customer = {
+    'name': 'test',
+    'reseller_uuid': '00000000-0000-0000-0000-000000000001'
+}
+client.customers.create(customer)
+```
+
+### Get a customer
+
+```python
+client.customers.get(customer_uuid)
+```
+
+### Update a customer
+
+```python
+client.customers.update(customer_uuid, new_customer)
+```
+
+### Delete a customer
+
+```python
+client.customers.delete(customer_uuid)
+```
+
 ## Resellers
 
 ### Listing resellers
