@@ -19,6 +19,7 @@ setup(
         'nestbox_confd_client.commands': [
             'config = nestbox_confd_client.commands.config:ConfigCommand',
             'customers = nestbox_confd_client.commands.customers:CustomersCommand',
+            'locations = nestbox_confd_client.commands.locations:LocationsCommand',
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
         ],
     }

@@ -55,6 +55,42 @@ client.customers.update(customer_uuid, new_customer)
 client.customers.delete(customer_uuid)
 ```
 
+## Locations
+
+### Listing locations
+
+```python
+client.locations.list()
+```
+
+### Add a new location
+
+```python
+location = {
+    'name': 'test',
+    'customer_uuid': '00000000-0000-0000-0000-000000000001'
+}
+client.locations.create(location)
+```
+
+### Get a location
+
+```python
+client.locations.get(location_uuid)
+```
+
+### Update a location
+
+```python
+client.locations.update(location_uuid, new_location)
+```
+
+### Delete a location
+
+```python
+client.locations.delete(location_uuid)
+```
+
 ## Resellers
 
 ### Listing resellers
