@@ -11,10 +11,47 @@ from nestbox_confd_client import Client
 client = Client('<nestbox hostname>', token='<auth token>')
 ```
 
+## Config
+
 ### Fetching the server config
 
 ```python
 client.config.get()
+```
+
+## Resellers
+
+### Listing resellers
+
+```python
+client.resellers.list()
+```
+
+### Add a new reseller
+
+```python
+reseller = {
+    'name': 'test',
+}
+client.resellers.create(reseller)
+```
+
+### Get a reseller
+
+```python
+client.resellers.get(reseller_uuid)
+```
+
+### Update a reseller
+
+```python
+client.resellers.update(reseller_uuid, new_reseller)
+```
+
+### Delete a reseller
+
+```python
+client.resellers.delete(reseller_uuid)
 ```
 
 ## Debian package

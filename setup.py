@@ -18,6 +18,7 @@ setup(
     entry_points={
         'nestbox_confd_client.commands': [
             'config = nestbox_confd_client.commands.config:ConfigCommand',
+            'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
         ],
     }
 )
