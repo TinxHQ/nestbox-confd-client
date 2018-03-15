@@ -91,6 +91,16 @@ client.locations.update(location_uuid, new_location)
 client.locations.delete(location_uuid)
 ```
 
+### Update wazo tenants
+
+```python
+wazo_tenants = [
+    {'uuid': '1234-abcd', 'instance_uuid': '5678-efgh'},
+    {'uuid': '9874-xyzw', 'instance_uuid': '7896-mnop'},
+]
+client.locations.update_wazo_tenants(location_uuid, wazo_tenants)
+```
+
 ## Resellers
 
 ### Listing resellers

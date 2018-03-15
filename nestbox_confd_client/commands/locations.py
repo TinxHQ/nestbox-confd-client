@@ -35,3 +35,12 @@ class LocationsCommand(ConfdCommand):
         url = '{base}/{uuid}'.format(base=self.base_url, uuid=location_uuid)
         r = self.session.put(url, json=location, headers=self._rw_headers)
         self.raise_from_response(r)
+
+    def update_wazo_tenants(self, location_uuid, wazo_tenants):
+        url = '{base}/{uuid}/wazo/tenants'.format(base=self.base_url, uuid=location_uuid)
+        body = {
+            'wazo_tenants': [{'uuid': wazo_tenant['uuid'], 'instance_uuid': wazo_tenant['instance_uuid']}
+                             for wazo_tenant in wazo_tenants]
+        }
+        r = self.session.put(url, json=body, headers=self._rw_headers)
+        self.raise_from_response(r)
