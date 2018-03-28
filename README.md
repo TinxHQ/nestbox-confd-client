@@ -136,6 +136,41 @@ client.resellers.update(reseller_uuid, new_reseller)
 client.resellers.delete(reseller_uuid)
 ```
 
+## User
+
+### Listing users
+
+```python
+client.users.list()
+```
+
+### Add a new user
+
+```python
+user = {
+    'visualizarion': 'some data'
+}
+client.users.create(user)
+```
+
+### Get a user
+
+```python
+client.users.get(user_uuid)
+```
+
+### Update a user
+
+```python
+client.users.update(user_uuid, new_user)
+```
+
+### Delete a user
+
+```python
+client.users.delete(user_uuid)
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
