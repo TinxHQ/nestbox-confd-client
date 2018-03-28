@@ -14,7 +14,6 @@ class ConfdError(HTTPError):
 
         self.status_code = response.status_code
         try:
-            # TODO test is correct
             self.message = body['message']
             self.error_id = body['error_id']
             self.details = body['details']
