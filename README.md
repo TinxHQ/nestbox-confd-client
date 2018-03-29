@@ -171,6 +171,20 @@ client.users.update(user_uuid, new_user)
 client.users.delete(user_uuid)
 ```
 
+## Initialize
+
+### Initialize nestbox-confd
+
+```python
+init = {
+    'reseller': {
+        'uuid': '00000000-0000-0000-0000-000000000001',
+        'name': 'Super admin'
+    }
+}
+client.init.run(init)
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
