@@ -201,6 +201,14 @@ event = {
 client.engines.create_account_event(instance_uuid, event)
 ```
 
+## Tenant
+
+### Get account summaries
+
+```python
+client.tenants.get_account_summaries(tenant_uuid)
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
