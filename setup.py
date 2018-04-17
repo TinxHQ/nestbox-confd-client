@@ -23,6 +23,7 @@ setup(
             'init = nestbox_confd_client.commands.init:InitCommand',
             'locations = nestbox_confd_client.commands.locations:LocationsCommand',
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
+            'tenants = nestbox_confd_client.commands.tenants:TenantsCommand',
             'users = nestbox_confd_client.commands.users:UsersCommand',
         ],
     }
