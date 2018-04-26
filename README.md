@@ -201,6 +201,12 @@ event = {
 client.engines.create_account_event(instance_uuid, event)
 ```
 
+### Check accounts hash
+
+```python
+client.engines.check_accounts_hash(instance_uuid, hash_)
+```
+
 ## Tenant
 
 ### Get account summaries
