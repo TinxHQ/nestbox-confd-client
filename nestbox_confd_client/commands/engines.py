@@ -19,4 +19,6 @@ class EnginesCommand(ConfdCommand):
         url = '{base}/instances/{uuid}/accounts/synchronize'.format(base=self.base_url, uuid=instance_uuid)
         params = {'hash': hash_}
         r = self.session.head(url, params=params, headers=self._ro_headers)
-        return r.status_code == 204
+        if r.status_code in (204, 409):
+            return r.status_code == 204
+        self.raise_from_response(r)
