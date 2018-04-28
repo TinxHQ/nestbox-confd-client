@@ -207,6 +207,19 @@ client.engines.create_account_event(instance_uuid, event)
 client.engines.check_accounts_hash(instance_uuid, hash_)
 ```
 
+### Check accounts hash
+
+```python
+accounts = [{
+    'engine_uuid': '00000000-0000-0000-0000-000000000001',
+    'engine_tenant_uuid': '00000000-0000-0000-0000-000000000002',
+    'engine_account_uuid': '00000000-0000-0000-0000-000000000003',
+    'engine_account_subscription': 1,
+    'created_at': '2018-04-10T12:59:09',
+}]
+client.engines.synchronize_accounts(instance_uuid, accounts)
+```
+
 ## Tenant
 
 ### Get account summaries
