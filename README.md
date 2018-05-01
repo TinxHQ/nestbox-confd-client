@@ -207,7 +207,7 @@ client.engines.create_account_event(instance_uuid, event)
 client.engines.check_accounts_hash(instance_uuid, hash_)
 ```
 
-### Check accounts hash
+### Synchronize accounts
 
 ```python
 accounts = [{
