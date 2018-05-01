@@ -22,3 +22,9 @@ class EnginesCommand(ConfdCommand):
         if r.status_code in (204, 409):
             return r.status_code == 204
         self.raise_from_response(r)
+
+    def synchronize_accounts(self, instance_uuid, accounts):
+        url = '{base}/instances/{uuid}/accounts/synchronize'.format(base=self.base_url, uuid=instance_uuid)
+        body = {'accounts': accounts}
+        r = self.session.post(url, json=body, headers=self._rw_headers)
+        self.raise_from_response(r)
