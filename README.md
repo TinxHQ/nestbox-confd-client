@@ -95,8 +95,8 @@ client.locations.delete(location_uuid)
 
 ```python
 wazo_tenants = [
-    {'uuid': '1234-abcd', 'instance_uuid': '5678-efgh'},
-    {'uuid': '9874-xyzw', 'instance_uuid': '7896-mnop'},
+    {'uuid': '1234-abcd', 'instance_uuid': '5678-efgh', 'credential_uuid': '32425-srfegs'},
+    {'uuid': '9874-xyzw', 'instance_uuid': '7896-mnop', 'credential_uuid': '34623-sdbfxc'},
 ]
 client.locations.update_wazo_tenants(location_uuid, wazo_tenants)
 ```
