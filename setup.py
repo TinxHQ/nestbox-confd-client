@@ -25,6 +25,10 @@ setup(
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
             'tenants = nestbox_confd_client.commands.tenants:TenantsCommand',
             'users = nestbox_confd_client.commands.users:UsersCommand',
+            'swarm = nestbox_confd_client.commands.swarm:Swarm',
+        ],
+        'nestbox_confd_client.commands.swarm.plugins': [
+            'credentials = nestbox_confd_client.commands.swarm.plugins.credentials:CredentialsCommand',
         ],
     }
 )
