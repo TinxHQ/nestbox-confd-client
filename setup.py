@@ -29,6 +29,7 @@ setup(
         ],
         'nestbox_confd_client.commands.swarm.plugins': [
             'credentials = nestbox_confd_client.commands.swarm.plugins.credentials:CredentialsCommand',
+            'token = nestbox_confd_client.commands.swarm.plugins.token:TokenCommand',
         ],
     }
 )

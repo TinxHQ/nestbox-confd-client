@@ -8,9 +8,6 @@ class CredentialsCommand(ConfdSwarmCommand):
 
     resource = 'credentials'
 
-    def __init__(self, client):
-        super().__init__(client)
-
     def list(self, **params):
         url = self.base_url
         headers = self._get_headers(**params)
