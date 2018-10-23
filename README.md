@@ -228,6 +228,14 @@ client.engines.synchronize_accounts(instance_uuid, accounts)
 client.tenants.get_account_summaries(tenant_uuid)
 ```
 
+## Swarm
+
+### Get JWT token
+
+```python
+client.swarm.token.get()
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
