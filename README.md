@@ -228,6 +228,14 @@ client.engines.synchronize_accounts(instance_uuid, accounts)
 client.tenants.get_account_summaries(tenant_uuid)
 ```
 
+## Accounts
+
+### List accounts
+
+```python
+client.accounts.list()
+```
+
 ## Swarm
 
 ### Get JWT token
