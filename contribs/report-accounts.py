@@ -25,6 +25,8 @@ def main():
 
     auth_client = AuthClient(
         args.host,
+        port=443,
+        prefix='/api/auth',
         verify_certificate=verify_certificate,
         username=args.username,
         password=args.password,
@@ -33,6 +35,8 @@ def main():
 
     confd_client = ConfdClient(
         args.host,
+        port=9486,
+        prefix='/api/confd',
         verify_certificate=verify_certificate,
         token=token
     )
