@@ -35,7 +35,7 @@ def main():
 
     confd_client = ConfdClient(
         args.host,
-        port=9486,
+        port=443,
         prefix='/api/confd',
         verify_certificate=verify_certificate,
         token=token
