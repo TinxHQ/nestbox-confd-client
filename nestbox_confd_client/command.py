@@ -17,6 +17,9 @@ class ConfdCommand(RESTCommand):
 
     @staticmethod
     def raise_from_response(response):
+        if response.status_code < 400:
+            return
+
         if response.status_code == 503:
             raise ConfdServiceUnavailable(response)
 
