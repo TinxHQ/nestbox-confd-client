@@ -185,6 +185,14 @@ init = {
 client.init.run(init)
 ```
 
+## Instance
+
+### listing instances
+
+```python
+client.instances.list()
+```
+
 ## Engine
 
 ### Send an account event
