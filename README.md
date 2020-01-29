@@ -228,15 +228,13 @@ accounts = [{
 client.engines.synchronize_accounts(instance_uuid, accounts)
 ```
 
-## Tenant
+## Accounts
 
-### Get account summaries
+### List accounts summaries
 
 ```python
-client.tenants.get_account_summaries(tenant_uuid)
+client.accounts.get_summaries()
 ```
-
-## Accounts
 
 ### List accounts
 
