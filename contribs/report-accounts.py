@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2019-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
@@ -61,10 +61,11 @@ def main():
         for account in accounts:
             account['reseller_name'] = reseller['name']
             account['reseller_uuid'] = reseller['uuid']
-            account['customer_name'] = account['customer']['name']
-            account['customer_uuid'] = account['customer']['uuid']
-            account.pop('customer')
             account['user_uuid'] = account.pop('uuid')
+            customer = account.pop('customer')
+            if customer is not None:
+                account['customer_name'] = customer['name']
+                account['customer_uuid'] = customer['uuid']
             writer.writerow(account)
 
     if args.output:
