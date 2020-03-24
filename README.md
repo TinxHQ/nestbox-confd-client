@@ -19,6 +19,14 @@ client = Client('<nestbox hostname>', token='<auth token>')
 client.config.get()
 ```
 
+## Status
+
+### Check the server status
+
+```python
+client.status.check()
+```
+
 ## Customers
 
 ### Listing customers

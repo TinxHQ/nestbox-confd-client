@@ -24,6 +24,7 @@ setup(
             'instances = nestbox_confd_client.commands.instances:InstancesCommand',
             'locations = nestbox_confd_client.commands.locations:LocationsCommand',
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
+            'status = nestbox_confd_client.commands.status:StatusCommand',
             'users = nestbox_confd_client.commands.users:UsersCommand',
         ],
     }
