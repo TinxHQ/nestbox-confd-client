@@ -19,6 +19,14 @@ client = Client('<nestbox hostname>', token='<auth token>')
 client.config.get()
 ```
 
+## Status
+
+### Check the server status
+
+```python
+client.status.check()
+```
+
 ## Customers
 
 ### Listing customers
@@ -240,14 +248,6 @@ client.accounts.get_summaries()
 
 ```python
 client.accounts.list()
-```
-
-## Swarm
-
-### Get JWT token
-
-```python
-client.swarm.token.get()
 ```
 
 ## Debian package

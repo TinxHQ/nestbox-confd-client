@@ -2,7 +2,6 @@
 # Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-
 from setuptools import setup
 from setuptools import find_packages
 
@@ -25,12 +24,8 @@ setup(
             'instances = nestbox_confd_client.commands.instances:InstancesCommand',
             'locations = nestbox_confd_client.commands.locations:LocationsCommand',
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
+            'status = nestbox_confd_client.commands.status:StatusCommand',
             'users = nestbox_confd_client.commands.users:UsersCommand',
-            'swarm = nestbox_confd_client.commands.swarm:Swarm',
-        ],
-        'nestbox_confd_client.commands.swarm.plugins': [
-            'credentials = nestbox_confd_client.commands.swarm.plugins.credentials:CredentialsCommand',
-            'token = nestbox_confd_client.commands.swarm.plugins.token:TokenCommand',
         ],
     }
 )
