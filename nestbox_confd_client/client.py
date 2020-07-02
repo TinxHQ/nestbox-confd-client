@@ -1,4 +1,4 @@
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -11,11 +11,14 @@ class ConfdClient(BaseClient):
 
     def __init__(self,
                  host,
-                 port=9486,
+                 port=443,
+                 prefix='/api/confd',
                  version='1.0',
                  **kwargs):
         super(ConfdClient, self).__init__(
-              host=host,
-              port=port,
-              version=version,
-              **kwargs)
+            host=host,
+            port=port,
+            prefix=prefix,
+            version=version,
+            **kwargs
+        )
