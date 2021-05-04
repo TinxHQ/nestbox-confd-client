@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2020-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
@@ -39,14 +39,14 @@ def main():
         port=443,
         prefix='/api/confd',
         verify_certificate=verify_certificate,
-        token=token
+        token=token,
     )
     deployd_client = DeploydClient(
         args.host,
         port=443,
         prefix='/api/deployd',
         verify_certificate=verify_certificate,
-        token=token
+        token=token,
     )
 
     instances = confd_client.instances.list(recurse=True)['items']

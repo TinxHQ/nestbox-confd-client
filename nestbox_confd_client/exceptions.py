@@ -1,11 +1,10 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from requests import HTTPError
 
 
 class ConfdError(HTTPError):
-
     def __init__(self, response):
         try:
             body = response.json()
