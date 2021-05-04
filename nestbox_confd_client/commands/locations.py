@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -21,28 +21,32 @@ class LocationsCommand(ConfdCommand):
         return r.json()
 
     def get(self, location_uuid):
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=location_uuid)
+        url = f'{self.base_url}/{location_uuid}'
         r = self.session.get(url, headers=self._ro_headers)
         self.raise_from_response(r)
         return r.json()
 
     def delete(self, location_uuid):
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=location_uuid)
+        url = f'{self.base_url}/{location_uuid}'
         r = self.session.delete(url, headers=self._ro_headers)
         self.raise_from_response(r)
 
     def update(self, location_uuid, location):
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=location_uuid)
+        url = f'{self.base_url}/{location_uuid}'
         r = self.session.put(url, json=location, headers=self._rw_headers)
         self.raise_from_response(r)
 
     def update_wazo_tenants(self, location_uuid, wazo_tenants):
-        url = '{base}/{uuid}/wazo/tenants'.format(base=self.base_url, uuid=location_uuid)
+        url = f'{self.base_url}/{location_uuid}/wazo/tenants'
         body = {
-            'wazo_tenants': [{'uuid': wazo_tenant['uuid'],
-                              'instance_uuid': wazo_tenant['instance_uuid'],
-                              'credential_uuid': wazo_tenant['credential_uuid']}
-                             for wazo_tenant in wazo_tenants]
+            'wazo_tenants': [
+                {
+                    'uuid': wazo_tenant['uuid'],
+                    'instance_uuid': wazo_tenant['instance_uuid'],
+                    'credential_uuid': wazo_tenant['credential_uuid'],
+                }
+                for wazo_tenant in wazo_tenants
+            ]
         }
         r = self.session.put(url, json=body, headers=self._rw_headers)
         self.raise_from_response(r)

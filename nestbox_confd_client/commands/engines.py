@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -11,12 +11,12 @@ class EnginesCommand(ConfdCommand):
     _rw_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     def create_account_event(self, instance_uuid, event):
-        url = '{base}/instances/{uuid}/accounts/events'.format(base=self.base_url, uuid=instance_uuid)
+        url = f'{self.base_url}/instances/{instance_uuid}/accounts/events'
         r = self.session.post(url, json=event, headers=self._rw_headers)
         self.raise_from_response(r)
 
     def check_accounts_hash(self, instance_uuid, hash_):
-        url = '{base}/instances/{uuid}/accounts/synchronize'.format(base=self.base_url, uuid=instance_uuid)
+        url = f'{self.base_url}/instances/{instance_uuid}/synchronize'
         params = {'hash': hash_}
         r = self.session.head(url, params=params, headers=self._ro_headers)
         if r.status_code in (204, 409):
@@ -24,7 +24,7 @@ class EnginesCommand(ConfdCommand):
         self.raise_from_response(r)
 
     def synchronize_accounts(self, instance_uuid, accounts):
-        url = '{base}/instances/{uuid}/accounts/synchronize'.format(base=self.base_url, uuid=instance_uuid)
+        url = f'{self.base_url}/instances/{instance_uuid}/synchronize'
         body = {'accounts': accounts}
         r = self.session.post(url, json=body, headers=self._rw_headers)
         self.raise_from_response(r)

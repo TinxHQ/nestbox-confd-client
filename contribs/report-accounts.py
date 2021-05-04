@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2019-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2019-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
@@ -38,7 +38,7 @@ def main():
         port=443,
         prefix='/api/confd',
         verify_certificate=verify_certificate,
-        token=token
+        token=token,
     )
     resellers = confd_client.resellers.list()['items']
 
@@ -52,7 +52,7 @@ def main():
         'tenant_uuid',
         'subscription',
         'created_at',
-        'modified_at'
+        'modified_at',
     ]
     writer = csv.DictWriter(result, fieldnames=fieldnames)
     writer.writeheader()
