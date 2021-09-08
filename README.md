@@ -250,6 +250,14 @@ client.accounts.get_summaries()
 client.accounts.list()
 ```
 
+## Tenants
+
+### Get a tenant
+
+```python
+client.tenants.get(tenant_uuid)
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
