@@ -7,10 +7,10 @@ from nestbox_confd_client.command import ConfdCommand
 class TenantsCommand(ConfdCommand):
 
     resource = 'tenants'
-    _ro_headers = {'Accept': 'application/json'}
 
     def get(self, tenant_uuid):
+        headers = self._get_headers()
         url = f'{self.base_url}/{tenant_uuid}'
-        r = self.session.get(url, headers=self._ro_headers)
+        r = self.session.get(url, headers=headers)
         self.raise_from_response(r)
         return r.json()

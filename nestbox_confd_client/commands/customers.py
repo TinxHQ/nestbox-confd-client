@@ -1,4 +1,4 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -7,31 +7,34 @@ from nestbox_confd_client.command import ConfdCommand
 class CustomersCommand(ConfdCommand):
 
     resource = 'customers'
-    _ro_headers = {'Accept': 'application/json'}
-    _rw_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     def create(self, customer):
-        r = self.session.post(self.base_url, json=customer, headers=self._rw_headers)
+        headers = self._get_headers()
+        r = self.session.post(self.base_url, json=customer, headers=headers)
         self.raise_from_response(r)
         return r.json()
 
     def list(self, **kwargs):
-        r = self.session.get(self.base_url, headers=self._ro_headers, params=kwargs)
+        headers = self._get_headers()
+        r = self.session.get(self.base_url, headers=headers, params=kwargs)
         self.raise_from_response(r)
         return r.json()
 
     def get(self, customer_uuid):
+        headers = self._get_headers()
         url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
-        r = self.session.get(url, headers=self._ro_headers)
+        r = self.session.get(url, headers=headers)
         self.raise_from_response(r)
         return r.json()
 
     def delete(self, customer_uuid):
+        headers = self._get_headers()
         url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
-        r = self.session.delete(url, headers=self._ro_headers)
+        r = self.session.delete(url, headers=headers)
         self.raise_from_response(r)
 
     def update(self, customer_uuid, customer):
+        headers = self._get_headers()
         url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
-        r = self.session.put(url, json=customer, headers=self._rw_headers)
+        r = self.session.put(url, json=customer, headers=headers)
         self.raise_from_response(r)
