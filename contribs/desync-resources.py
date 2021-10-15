@@ -6,6 +6,7 @@ import argparse
 import csv
 import io
 import shutil
+import sys
 
 from nestbox_confd_client import Client as ConfdClient
 from wazo_auth_client import Client as AuthClient
@@ -41,21 +42,24 @@ def main():
         verify_certificate=verify_certificate,
         token=token,
     )
-    result = io.StringIO()
-    fieldnames = [
-        'uuid',
-        'type',
-        'name',
-    ]
-    writer = csv.DictWriter(result, fieldnames=fieldnames)
-    writer.writeheader()
-
+    rcl = []
     if args.rcl:
-        detect_desync_rcl(writer, auth_client, confd_client)
+        rcl = detect_desync_rcl(auth_client, confd_client)
 
+    users = []
     if args.users:
         force_synchro = args.delete_orphan_users
-        detect_desync_users(writer, auth_client, confd_client, force_synchro)
+        users = detect_desync_users(auth_client, confd_client, force_synchro)
+
+    if not rcl and not users:
+        sys.exit(0)
+
+    result = io.StringIO()
+    fieldnames = ['uuid', 'type', 'name']
+    writer = csv.DictWriter(result, fieldnames=fieldnames)
+    writer.writeheader()
+    for row in rcl + users:
+        writer.writerow(row)
 
     if args.output:
         with open(args.output, 'w') as fobj:
@@ -64,8 +68,12 @@ def main():
     else:
         print(result.getvalue())
 
+    result.close()
+    sys.exit(1)
 
-def detect_desync_users(writer, auth_client, confd_client, force_synchro):
+
+def detect_desync_users(auth_client, confd_client, force_synchro):
+    result = []
     response = auth_client.users.list(recurse=True)
     users = {user['uuid']: user for user in response['items']}
 
@@ -73,17 +81,18 @@ def detect_desync_users(writer, auth_client, confd_client, force_synchro):
     for confd_user in confd_users:
         user = users.get(confd_user['uuid'])
         if not user:
-            row = {
+            result.append({
                 'uuid': confd_user['uuid'],
                 'type': 'user',
                 'name': '',
-            }
-            writer.writerow(row)
+            })
             if force_synchro:
                 confd_client.users.delete(confd_user['uuid'])
+    return result
 
 
-def detect_desync_rcl(writer, auth_client, confd_client):
+def detect_desync_rcl(auth_client, confd_client):
+    result = []
     response = auth_client.tenants.list()
     tenants = {tenant['uuid']: tenant for tenant in response['items']}
 
@@ -91,34 +100,32 @@ def detect_desync_rcl(writer, auth_client, confd_client):
     for reseller in resellers:
         tenant = tenants.get(reseller['uuid'])
         if not tenant:
-            row = {
+            result.append({
                 'uuid': reseller['uuid'],
                 'type': 'reseller',
                 'name': reseller['name'],
-            }
-            writer.writerow(row)
+            })
 
     customers = confd_client.customers.list()['items']
     for customer in customers:
         tenant = tenants.get(customer['uuid'])
         if not tenant:
-            row = {
+            result.append({
                 'uuid': customer['uuid'],
                 'type': 'customer',
                 'name': customer['name'],
-            }
-            writer.writerow(row)
+            })
 
     locations = confd_client.locations.list()['items']
     for location in locations:
         tenant = tenants.get(location['uuid'])
         if not tenant:
-            row = {
+            result.append({
                 'uuid': location['uuid'],
                 'type': 'location',
                 'name': location['name'],
-            }
-            writer.writerow(row)
+            })
+    return result
 
 
 def parse_args():
