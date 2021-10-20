@@ -135,10 +135,10 @@ def detect_desync_rcl(auth_client, confd_client):
 def parse_args():
     parser = argparse.ArgumentParser(
         description="""
-        Script to detect desynchronization between wazo-auth and nestbox-confd.
+        Detect desynchronizations between wazo-auth and nestbox-confd.
 
-        Only users can be removed automatically from nestbox-confd because impacts are mitigate
-        All other destructive operation must be done manually
+        Only users can be removed automatically from nestbox-confd because impacts are minimal.
+        Any other destructive operation must be done manually
         """
     )
     parser.add_argument(
