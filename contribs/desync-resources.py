@@ -48,11 +48,10 @@ def main():
 
     users = []
     if args.users:
-        users = detect_desync_users(
-            auth_client,
-            confd_client,
-            args.delete_orphan_users,
-        )
+        users = detect_desync_users(auth_client, confd_client)
+
+    if args.delete_orphan_users:
+        delete_desync_users(confd_client, users)
 
     if not rcl and not users:
         sys.exit(0)
@@ -75,7 +74,12 @@ def main():
     sys.exit(1)
 
 
-def detect_desync_users(auth_client, confd_client, delete_orphan_users):
+def delete_desync_users(confd_client, users):
+    for user in users:
+        confd_client.users.delete(user['uuid'])
+
+
+def detect_desync_users(auth_client, confd_client):
     result = []
     response = auth_client.users.list(recurse=True)
     user_uuids = set(user['uuid'] for user in response['items'])
@@ -88,8 +92,6 @@ def detect_desync_users(auth_client, confd_client, delete_orphan_users):
                 'type': 'user',
                 'name': '',
             })
-            if delete_orphan_users:
-                confd_client.users.delete(confd_user['uuid'])
     return result
 
 
