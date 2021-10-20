@@ -108,12 +108,11 @@ def detect_desync_users(auth_client, confd_client):
 def detect_desync_rcl(auth_client, confd_client):
     result = []
     response = auth_client.tenants.list()
-    tenants = {tenant['uuid']: tenant for tenant in response['items']}
+    tenants = set(tenant['uuid'] for tenant in response['items'])
 
     resellers = confd_client.resellers.list()['items']
     for reseller in resellers:
-        tenant = tenants.get(reseller['uuid'])
-        if not tenant:
+        if reseller['uuid'] not in tenants:
             result.append({
                 'uuid': reseller['uuid'],
                 'type': 'reseller',
@@ -122,8 +121,7 @@ def detect_desync_rcl(auth_client, confd_client):
 
     customers = confd_client.customers.list()['items']
     for customer in customers:
-        tenant = tenants.get(customer['uuid'])
-        if not tenant:
+        if customer['uuid'] not in tenants:
             result.append({
                 'uuid': customer['uuid'],
                 'type': 'customer',
@@ -132,8 +130,7 @@ def detect_desync_rcl(auth_client, confd_client):
 
     locations = confd_client.locations.list()['items']
     for location in locations:
-        tenant = tenants.get(location['uuid'])
-        if not tenant:
+        if location['uuid'] not in tenants:
             result.append({
                 'uuid': location['uuid'],
                 'type': 'location',
