@@ -97,11 +97,13 @@ def detect_desync_users(auth_client, confd_client):
     confd_users = confd_client.users.list()['items']
     for confd_user in confd_users:
         if confd_user['uuid'] not in user_uuids:
-            result.append({
-                'uuid': confd_user['uuid'],
-                'type': 'user',
-                'name': '',
-            })
+            result.append(
+                {
+                    'uuid': confd_user['uuid'],
+                    'type': 'user',
+                    'name': '',
+                }
+            )
     return result
 
 
@@ -113,29 +115,35 @@ def detect_desync_rcl(auth_client, confd_client):
     resellers = confd_client.resellers.list()['items']
     for reseller in resellers:
         if reseller['uuid'] not in tenants:
-            result.append({
-                'uuid': reseller['uuid'],
-                'type': 'reseller',
-                'name': reseller['name'],
-            })
+            result.append(
+                {
+                    'uuid': reseller['uuid'],
+                    'type': 'reseller',
+                    'name': reseller['name'],
+                }
+            )
 
     customers = confd_client.customers.list()['items']
     for customer in customers:
         if customer['uuid'] not in tenants:
-            result.append({
-                'uuid': customer['uuid'],
-                'type': 'customer',
-                'name': customer['name'],
-            })
+            result.append(
+                {
+                    'uuid': customer['uuid'],
+                    'type': 'customer',
+                    'name': customer['name'],
+                }
+            )
 
     locations = confd_client.locations.list()['items']
     for location in locations:
         if location['uuid'] not in tenants:
-            result.append({
-                'uuid': location['uuid'],
-                'type': 'location',
-                'name': location['name'],
-            })
+            result.append(
+                {
+                    'uuid': location['uuid'],
+                    'type': 'location',
+                    'name': location['name'],
+                }
+            )
     return result
 
 
