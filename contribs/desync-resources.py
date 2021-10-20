@@ -4,8 +4,6 @@
 
 import argparse
 import csv
-import io
-import shutil
 import sys
 
 from nestbox_confd_client import Client as ConfdClient
@@ -56,21 +54,20 @@ def main():
     if not rcl and not users:
         sys.exit(0)
 
-    result = io.StringIO()
+    if args.output:
+        output_file = open(args.output, "w")
+    else:
+        output_file = sys.stdout
+
     fieldnames = ['uuid', 'type', 'name']
-    writer = csv.DictWriter(result, fieldnames=fieldnames)
+    writer = csv.DictWriter(output_file, fieldnames=fieldnames)
     writer.writeheader()
     for row in rcl + users:
         writer.writerow(row)
 
     if args.output:
-        with open(args.output, 'w') as fobj:
-            result.seek(0)
-            shutil.copyfileobj(result, fobj)
-    else:
-        print(result.getvalue())
+        output_file.close()
 
-    result.close()
     sys.exit(1)
 
 
