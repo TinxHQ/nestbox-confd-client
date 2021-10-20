@@ -48,8 +48,11 @@ def main():
 
     users = []
     if args.users:
-        force_synchro = args.delete_orphan_users
-        users = detect_desync_users(auth_client, confd_client, force_synchro)
+        users = detect_desync_users(
+            auth_client,
+            confd_client,
+            args.delete_orphan_users,
+        )
 
     if not rcl and not users:
         sys.exit(0)
@@ -72,21 +75,20 @@ def main():
     sys.exit(1)
 
 
-def detect_desync_users(auth_client, confd_client, force_synchro):
+def detect_desync_users(auth_client, confd_client, delete_orphan_users):
     result = []
     response = auth_client.users.list(recurse=True)
-    users = {user['uuid']: user for user in response['items']}
+    user_uuids = set(user['uuid'] for user in response['items'])
 
     confd_users = confd_client.users.list()['items']
     for confd_user in confd_users:
-        user = users.get(confd_user['uuid'])
-        if not user:
+        if confd_user['uuid'] not in user_uuids:
             result.append({
                 'uuid': confd_user['uuid'],
                 'type': 'user',
                 'name': '',
             })
-            if force_synchro:
+            if delete_orphan_users:
                 confd_client.users.delete(confd_user['uuid'])
     return result
 
