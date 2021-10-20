@@ -29,6 +29,10 @@ def main():
     if not password:
         password = getpass()
 
+    kwargs = {}
+    if args.timeout:
+        kwargs['timeout'] = args.timeout
+
     auth_client = AuthClient(
         args.host,
         port=443,
@@ -36,6 +40,7 @@ def main():
         verify_certificate=verify_certificate,
         username=args.username,
         password=password,
+        **kwargs
     )
     token = auth_client.token.new()['token']
     auth_client.set_token(token)
@@ -46,6 +51,7 @@ def main():
         prefix='/api/confd',
         verify_certificate=verify_certificate,
         token=token,
+        **kwargs
     )
     rcl = []
     if args.rcl:
@@ -158,6 +164,12 @@ def parse_args():
         '--verify_certificate',
         default='True',
         help="Boolean or path to verify certificate. Default: true",
+    )
+    parser.add_argument(
+        '-t',
+        '--timeout',
+        help="Timeout for contacting nestbox",
+        type=int,
     )
     parser.add_argument(
         '--rcl',
