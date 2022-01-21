@@ -226,6 +226,7 @@ client.engines.check_accounts_hash(instance_uuid, hash_)
 ### Synchronize accounts
 
 ```python
+engine_version = '22.02'
 accounts = [{
     'engine_uuid': '00000000-0000-0000-0000-000000000001',
     'engine_tenant_uuid': '00000000-0000-0000-0000-000000000002',
@@ -233,7 +234,7 @@ accounts = [{
     'engine_account_subscription': 1,
     'created_at': '2018-04-10T12:59:09',
 }]
-client.engines.synchronize_accounts(instance_uuid, accounts)
+client.engines.synchronize_accounts(instance_uuid, accounts, engine_version)
 ```
 
 ## Accounts

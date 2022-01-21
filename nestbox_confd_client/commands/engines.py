@@ -1,4 +1,4 @@
-# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -23,9 +23,9 @@ class EnginesCommand(ConfdCommand):
             return r.status_code == 204
         self.raise_from_response(r)
 
-    def synchronize_accounts(self, instance_uuid, accounts):
+    def synchronize_accounts(self, instance_uuid, accounts, engine_version):
         headers = self._get_headers()
         url = f'{self.base_url}/instances/{instance_uuid}/accounts/synchronize'
-        body = {'accounts': accounts}
+        body = {'accounts': accounts, 'engine_version': engine_version}
         r = self.session.post(url, json=body, headers=headers)
         self.raise_from_response(r)
