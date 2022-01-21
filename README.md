@@ -226,7 +226,7 @@ client.engines.check_accounts_hash(instance_uuid, hash_)
 ### Synchronize accounts
 
 ```python
-engine_version = '22'02'
+engine_version = '22.02'
 accounts = [{
     'engine_uuid': '00000000-0000-0000-0000-000000000001',
     'engine_tenant_uuid': '00000000-0000-0000-0000-000000000002',
