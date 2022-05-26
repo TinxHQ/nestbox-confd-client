@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-# Copyright 2020-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2020-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
 import csv
 import io
+import os
 import shutil
+
+from getpass import getpass
 
 from nestbox_confd_client import Client as ConfdClient
 from wazo_auth_client import Client as AuthClient
@@ -24,13 +27,17 @@ def main():
     args = parse_args()
     verify_certificate = _extract_verify_certificate(args.verify_certificate)
 
+    password = os.getenv('PORTAL_PASSWORD', None)
+    if not password:
+        password = getpass()
+
     auth_client = AuthClient(
         args.host,
         port=443,
         prefix='/api/auth',
         verify_certificate=verify_certificate,
         username=args.username,
-        password=args.password,
+        password=password,
     )
     token = auth_client.token.new()['token']
 
@@ -90,11 +97,6 @@ def parse_args():
     parser.add_argument(
         '-u',
         '--username',
-        required=True,
-    )
-    parser.add_argument(
-        '-p',
-        '--password',
         required=True,
     )
     parser.add_argument(
