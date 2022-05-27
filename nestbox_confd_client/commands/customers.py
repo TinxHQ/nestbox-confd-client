@@ -1,4 +1,4 @@
-# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -15,7 +15,7 @@ class CustomersCommand(ConfdCommand):
         return r.json()
 
     def list(self, **kwargs):
-        headers = self._get_headers()
+        headers = self._get_headers(**kwargs)
         r = self.session.get(self.base_url, headers=headers, params=kwargs)
         self.raise_from_response(r)
         return r.json()
