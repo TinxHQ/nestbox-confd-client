@@ -22,19 +22,19 @@ class CustomersCommand(ConfdCommand):
 
     def get(self, customer_uuid):
         headers = self._get_headers()
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
+        url = f'{self.base_url}/{customer_uuid}'
         r = self.session.get(url, headers=headers)
         self.raise_from_response(r)
         return r.json()
 
     def delete(self, customer_uuid):
         headers = self._get_headers()
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
+        url = f'{self.base_url}/{customer_uuid}'
         r = self.session.delete(url, headers=headers)
         self.raise_from_response(r)
 
     def update(self, customer_uuid, customer):
         headers = self._get_headers()
-        url = '{base}/{uuid}'.format(base=self.base_url, uuid=customer_uuid)
+        url = f'{self.base_url}/{customer_uuid}'
         r = self.session.put(url, json=customer, headers=headers)
         self.raise_from_response(r)
