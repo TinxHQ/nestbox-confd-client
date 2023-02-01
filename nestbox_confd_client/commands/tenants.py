@@ -1,11 +1,10 @@
-# Copyright 2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2021-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
 
 
 class TenantsCommand(ConfdCommand):
-
     resource = 'tenants'
 
     def get(self, tenant_uuid):
