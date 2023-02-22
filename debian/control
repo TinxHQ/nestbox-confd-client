@@ -3,13 +3,12 @@ Section: python
 Priority: extra
 Maintainer: Wazo Maintainers <dev@wazo.io>
 Build-Depends:
- debhelper (>= 9),
+ debhelper (>= 12),
  dh-python,
- dh-systemd (>= 1.5),
  python3-all,
  python3-setuptools
 Standards-Version: 3.9.6
-X-Python3-Version: >= 3.7
+X-Python3-Version: >= 3.9
 
 Package: nestbox-confd-client-python3
 Architecture: all
