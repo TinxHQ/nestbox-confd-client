@@ -13,9 +13,9 @@ class LocationsCommand(ConfdCommand):
         self.raise_from_response(r)
         return r.json()
 
-    def list(self):
-        headers = self._get_headers()
-        r = self.session.get(self.base_url, headers=headers)
+    def list(self, **kwargs):
+        headers = self._get_headers(**kwargs)
+        r = self.session.get(self.base_url, headers=headers, params=kwargs)
         self.raise_from_response(r)
         return r.json()
 
