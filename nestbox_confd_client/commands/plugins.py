@@ -35,5 +35,5 @@ class PluginsCommand(ConfdCommand):
     def update(self, plugin_uuid, plugin, tenant_uuid=None):
         headers = self._get_headers(tenant_uuid=tenant_uuid)
         url = f'{self.base_url}/{plugin_uuid}'
-        r = self.session.patch(url, json=plugin, headers=headers)
+        r = self.session.put(url, json=plugin, headers=headers)
         self.raise_from_response(r)
