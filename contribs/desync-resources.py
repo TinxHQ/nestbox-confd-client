@@ -41,7 +41,7 @@ def main():
         verify_certificate=verify_certificate,
         username=args.username,
         password=password,
-        **kwargs
+        **kwargs,
     )
     token = auth_client.token.new()['token']
     auth_client.set_token(token)
@@ -52,7 +52,7 @@ def main():
         prefix='/api/confd',
         verify_certificate=verify_certificate,
         token=token,
-        **kwargs
+        **kwargs,
     )
     rcl = []
     if args.rcl:
