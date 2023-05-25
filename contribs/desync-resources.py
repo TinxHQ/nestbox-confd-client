@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-# Copyright 2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2021-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
+from __future__ import annotations
 
 import argparse
 import csv
@@ -13,7 +14,7 @@ from nestbox_confd_client import Client as ConfdClient
 from wazo_auth_client import Client as AuthClient
 
 
-def _extract_verify_certificate(value):
+def _extract_verify_certificate(value: str) -> bool | str:
     if value.lower() == 'true':
         return True
     if value.lower() == 'false':
@@ -29,7 +30,7 @@ def main():
     if not password:
         password = getpass()
 
-    kwargs = {}
+    kwargs: dict[str, int] = {}
     if args.timeout:
         kwargs['timeout'] = args.timeout
 
@@ -92,7 +93,7 @@ def delete_desync_users(confd_client, users):
 def detect_desync_users(auth_client, confd_client):
     result = []
     response = auth_client.users.list(recurse=True)
-    user_uuids = set(user['uuid'] for user in response['items'])
+    user_uuids = {user['uuid'] for user in response['items']}
 
     confd_users = confd_client.users.list()['items']
     for confd_user in confd_users:
@@ -110,7 +111,7 @@ def detect_desync_users(auth_client, confd_client):
 def detect_desync_rcl(auth_client, confd_client):
     result = []
     response = auth_client.tenants.list()
-    tenants = set(tenant['uuid'] for tenant in response['items'])
+    tenants = {tenant['uuid'] for tenant in response['items']}
 
     resellers = confd_client.resellers.list()['items']
     for reseller in resellers:

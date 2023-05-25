@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-# Copyright 2020-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2020-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
+from __future__ import annotations
 
 import argparse
 import csv
@@ -15,7 +16,7 @@ from wazo_auth_client import Client as AuthClient
 from wazo_deployd_client import Client as DeploydClient
 
 
-def _extract_verify_certificate(value):
+def _extract_verify_certificate(value: str) -> bool | str:
     if value.lower() == 'true':
         return True
     if value.lower() == 'false':
