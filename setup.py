@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import setup
@@ -22,6 +22,7 @@ setup(
             'engines = nestbox_confd_client.commands.engines:EnginesCommand',
             'init = nestbox_confd_client.commands.init:InitCommand',
             'instances = nestbox_confd_client.commands.instances:InstancesCommand',
+            'plugins = nestbox_confd_client.commands.plugins:PluginsCommand',
             'locations = nestbox_confd_client.commands.locations:LocationsCommand',
             'resellers = nestbox_confd_client.commands.resellers:ResellersCommand',
             'status = nestbox_confd_client.commands.status:StatusCommand',
