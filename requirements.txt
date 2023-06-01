@@ -1,3 +1,3 @@
-https://github.com/wazo-platform/wazo-lib-rest-client/archive/wazo-23.05.zip
+https://github.com/wazo-platform/wazo-lib-rest-client/archive/master.zip
 requests==2.25.1
 stevedore==3.2.2
