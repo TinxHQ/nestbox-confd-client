@@ -54,6 +54,7 @@ def main():
     fieldnames = [
         'reseller_name',
         'reseller_uuid',
+        'reseller_country',
         'customer_name',
         'customer_uuid',
         'user_uuid',
@@ -74,6 +75,7 @@ def main():
             if customer is not None:
                 account['customer_name'] = customer['name']
                 account['customer_uuid'] = customer['uuid']
+            account['reseller_country'] = reseller['address'].get('country', '')
             writer.writerow(account)
 
     if args.output:
