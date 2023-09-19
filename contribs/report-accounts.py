@@ -70,12 +70,12 @@ def main():
         for account in accounts:
             account['reseller_name'] = reseller['name']
             account['reseller_uuid'] = reseller['uuid']
+            account['reseller_country'] = reseller['address']['country']
             account['user_uuid'] = account.pop('uuid')
             customer = account.pop('customer')
             if customer is not None:
                 account['customer_name'] = customer['name']
                 account['customer_uuid'] = customer['uuid']
-            account['reseller_country'] = reseller['address'].get('country', '')
             writer.writerow(account)
 
     if args.output:
