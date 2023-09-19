@@ -54,6 +54,7 @@ def main():
     fieldnames = [
         'reseller_name',
         'reseller_uuid',
+        'reseller_country',
         'customer_name',
         'customer_uuid',
         'user_uuid',
@@ -69,6 +70,7 @@ def main():
         for account in accounts:
             account['reseller_name'] = reseller['name']
             account['reseller_uuid'] = reseller['uuid']
+            account['reseller_country'] = reseller['address']['country']
             account['user_uuid'] = account.pop('uuid')
             customer = account.pop('customer')
             if customer is not None:
