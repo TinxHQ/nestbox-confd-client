@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2021-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2021-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 from __future__ import annotations
 
@@ -7,11 +7,11 @@ import argparse
 import csv
 import os
 import sys
-
 from getpass import getpass
 
-from nestbox_confd_client import Client as ConfdClient
 from wazo_auth_client import Client as AuthClient
+
+from nestbox_confd_client import Client as ConfdClient
 
 
 def _extract_verify_certificate(value: str) -> bool | str:
