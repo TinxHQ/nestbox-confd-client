@@ -29,10 +29,10 @@ class PluginsCommand(ConfdCommand):
         r = self.session.delete(url, headers=headers)
         self.raise_from_response(r)
 
-    def get(self, plugin_uuid, tenant_uuid=None):
+    def get(self, plugin_uuid, tenant_uuid=None, **kwargs):
         headers = self._get_headers(tenant_uuid=tenant_uuid)
         url = f'{self.base_url}/{plugin_uuid}'
-        r = self.session.get(url, headers=headers)
+        r = self.session.get(url, headers=headers, params=kwargs)
         self.raise_from_response(r)
         return r.json()
 
