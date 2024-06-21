@@ -1,4 +1,4 @@
-# Copyright 2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2023-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -6,6 +6,16 @@ from nestbox_confd_client.command import ConfdCommand
 
 class PluginsCommand(ConfdCommand):
     resource = 'plugins'
+
+    def clone(self, plugin_uuid, target_uuid, tenant_uuid=None):
+        headers = self._get_headers(tenant_uuid=tenant_uuid)
+        url = f'{self.base_url}/{plugin_uuid}/clone'
+        body = {
+            'resource_uuid': str(target_uuid),
+        }
+        r = self.session.put(url, headers=headers, json=body)
+        self.raise_from_response(r)
+        return r.json()
 
     def create(self, plugin, tenant_uuid=None):
         headers = self._get_headers(tenant_uuid=tenant_uuid)
