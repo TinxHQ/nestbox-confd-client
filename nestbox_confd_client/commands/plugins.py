@@ -80,12 +80,9 @@ class PluginsCommand(ConfdCommand):
     def _list_installs(self, resource_type, plugin_uuid, tenant_uuid=None, **kwargs):
         headers = self._get_headers(tenant_uuid=tenant_uuid)
         url = f'{self.base_url}/{plugin_uuid}/installs/{resource_type}'
-        params = {}
-        for key, value in kwargs.items():
-            if key == 'uuids':
-                params[key] = ','.join(value)
-                continue
-            params[key] = value
+        params = dict(kwargs)
+        if uuids := kwargs.get('uuids'):
+            params['uuids'] = ','.join(uuids)
 
         r = self.session.get(url, headers=headers, params=params)
         self.raise_from_response(r)
