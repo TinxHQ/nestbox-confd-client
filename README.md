@@ -259,6 +259,75 @@ client.accounts.list()
 client.tenants.get(tenant_uuid)
 ```
 
+## Plugins
+
+### Get a plugin
+
+```python
+client.plugins.get(plugin_uuid)
+```
+
+### List plugins
+
+```python
+client.plugins.list_(tenant_uuid)
+```
+
+### Create a plugin
+
+```python
+plugin_args = {
+    'configuration': {},
+    'manifest_url': '<url>',
+    'enabled': <true/false>,
+    'shared': <true/false>,
+}
+client.plugins.create(plugin_args)
+```
+
+### Update a plugin
+
+```python
+plugin_args = {
+    'configuration': {},
+    'enabled': <true/false>,
+    'shared': <true/false>,
+}
+client.plugins.update(plugin_uuid, plugin_args)
+```
+
+### Delete a plugin
+
+```python
+client.plugins.delete(plugin_uuid)
+```
+
+### Install (copy) a plugin to a subtenant
+
+```python
+# for a reseller
+client.plugins.install_for_reseller(plugin_uuid, reseller_uuid)
+
+# for a customer
+client.plugins.install_for_customer(plugin_uuid, customer_uuid)
+
+# for a location
+client.plugins.install_for_location(plugin_uuid, location_uuid)
+```
+
+### List a plugin installations into subtenants
+
+```python
+# list this plugin installations on resellers
+client.plugins.list_reseller_installs(plugin_uuid)
+
+# list this plugin installations on customers
+client.plugins.list_customer_installs(plugin_uuid)
+
+# list this plugin installations on locations
+client.plugins.list_location_installs(plugin_uuid)
+```
+
 ## Debian package
 
 Follow the following steps to build a debian package for nestbox-confd-client manually.
