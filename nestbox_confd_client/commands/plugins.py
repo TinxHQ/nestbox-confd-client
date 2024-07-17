@@ -47,7 +47,7 @@ class PluginsCommand(ConfdCommand):
             'resellers', plugin_uuid, tenant_uuid=tenant_uuid, **kwargs
         )
 
-    def install_for_customer(
+    def install_to_customer(
         self, plugin_uuid, customer_uuid, tenant_uuid=None, **params
     ):
         body = {'customer_uuid': customer_uuid, **params}
@@ -55,7 +55,7 @@ class PluginsCommand(ConfdCommand):
             'customers', plugin_uuid, body, tenant_uuid=tenant_uuid
         )
 
-    def install_for_location(
+    def install_to_location(
         self, plugin_uuid, location_uuid, tenant_uuid=None, **params
     ):
         body = {'location_uuid': location_uuid, **params}
@@ -63,7 +63,7 @@ class PluginsCommand(ConfdCommand):
             'locations', plugin_uuid, body, tenant_uuid=tenant_uuid
         )
 
-    def install_for_reseller(
+    def install_to_reseller(
         self, plugin_uuid, reseller_uuid, tenant_uuid=None, **params
     ):
         body = {'reseller_uuid': reseller_uuid, **params}
