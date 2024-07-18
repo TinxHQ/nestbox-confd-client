@@ -306,13 +306,13 @@ client.plugins.delete(plugin_uuid)
 
 ```python
 # for a reseller
-client.plugins.install_for_reseller(plugin_uuid, reseller_uuid)
+client.plugins.install_to_reseller(plugin_uuid, reseller_uuid)
 
 # for a customer
-client.plugins.install_for_customer(plugin_uuid, customer_uuid)
+client.plugins.install_to_customer(plugin_uuid, customer_uuid)
 
 # for a location
-client.plugins.install_for_location(plugin_uuid, location_uuid)
+client.plugins.install_to_location(plugin_uuid, location_uuid)
 ```
 
 ### List a plugin installations into subtenants
