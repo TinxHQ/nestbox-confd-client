@@ -1,4 +1,4 @@
-# Copyright 2018-2024 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from nestbox_confd_client.command import ConfdCommand
@@ -36,4 +36,10 @@ class ResellersCommand(ConfdCommand):
         headers = self._get_headers(tenant_uuid=tenant_uuid)
         url = f'{self.base_url}/{reseller_uuid}'
         r = self.session.put(url, json=reseller, headers=headers)
+        self.raise_from_response(r)
+
+    def update_parent(self, reseller_uuid, parent_uuid, tenant_uuid=None):
+        headers = self._get_headers(tenant_uuid=tenant_uuid)
+        url = f'{self.base_url}/{reseller_uuid}/parent/{parent_uuid}'
+        r = self.session.put(url, headers=headers)
         self.raise_from_response(r)

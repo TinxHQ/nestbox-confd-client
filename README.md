@@ -138,6 +138,12 @@ client.resellers.get(reseller_uuid)
 client.resellers.update(reseller_uuid, new_reseller)
 ```
 
+### Update a reseller parent
+
+```python
+client.resellers.update_parent(reseller_uuid, new_parent_reseller)
+```
+
 ### Delete a reseller
 
 ```python
